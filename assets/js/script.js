@@ -1,4 +1,4 @@
-var cityName = "Seattle"
+var testCity = "Seattle"
 var searchCity = $("#search-city")
 var APIkey = "c8af164d906f1649b6b1089b5ec881b1"
 var searchButtonEl = $("#search-button")
@@ -20,27 +20,52 @@ function getWeather(city){
                     for(i = 7; i < data.list.length; i += 8){
                         //converts unix timestamp to day of the week through dayjs
                         var parseDays = dayjs.unix(data.list[i].dt).format('ddd')
+                        forecast(parseDays, data);
 
-                        if (parseDays == "Fri"){
-                            console.log(dayjs.unix(data.list[i].dt).format('dddd, MMM D, YYYY'))
-                            console.log(data.list[i])
-                        }
-                        else if(parseDays == "Sat"){
-                            console.log(dayjs.unix(data.list[i].dt).format('dddd, MMM D, YYYY'))
-                            console.log(data.list[i])
-                        }
-                        else if(parseDays == "Sun"){
-                            console.log(dayjs.unix(data.list[i].dt).format('dddd, MMM D, YYYY'))
-                            console.log(data.list[i])
-                        }
-                        else{
-                            return;
-                        }
                     }
                 })
             })
         })
     })
+}
+
+function forecast(parseDays, data){
+    if (parseDays == "Fri"){
+        var date = dayjs.unix(data.list[i].dt).format('dddd, MMM D, YYYY')
+        var humidity= data.list[i].main.humidity;
+        console.log(data.list[i])
+        var tempK= data.list[i].main.temp;
+        var tempF=(((tempK-273.5)*1.80)+32).toFixed(2);
+
+        $("#fHumidity0").html(humidity+"%")
+        $("#fDate0").html(date)
+        $("#fTemp0").html(tempF+"&#8457");
+    }
+    else if(parseDays == "Sat"){
+        var date = dayjs.unix(data.list[i].dt).format('dddd, MMM D, YYYY')
+        var humidity= data.list[i].main.humidity;
+        console.log(data.list[i])
+        var tempK= data.list[i].main.temp;
+        var tempF=(((tempK-273.5)*1.80)+32).toFixed(2);
+
+        $("#fHumidity1").html(humidity+"%")
+        $("#fDate1").html(date)
+        $("#fTemp1").html(tempF+"&#8457");
+    }
+    else if(parseDays == "Sun"){
+        var date = dayjs.unix(data.list[i].dt).format('dddd, MMM D, YYYY')
+        var humidity= data.list[i].main.humidity;
+        console.log(data.list[i])
+        var tempK= data.list[i].main.temp;
+        var tempF=(((tempK-273.5)*1.80)+32).toFixed(2);
+
+        $("#fHumidity2").html(humidity+"%")
+        $("#fDate2").html(date)
+        $("#fTemp2").html(tempF+"&#8457");
+    }
+    else{
+        return;
+    }
 }
 
 function displayWeather(event){
