@@ -1,4 +1,3 @@
-var testCity = "Seattle"
 var searchCity = $("#search-city")
 var APIkey = "c8af164d906f1649b6b1089b5ec881b1"
 var searchButtonEl = $("#search-button")
@@ -21,7 +20,6 @@ function getWeather(city){
                         //converts unix timestamp to day of the week through dayjs
                         var parseDays = dayjs.unix(data.list[i].dt).format('ddd')
                         forecast(parseDays, data);
-
                     }
                 })
             })
@@ -76,4 +74,23 @@ function displayWeather(event){
     }
 }
 
+function addToList(event){
+    event.preventDefault();
+    var listEl= $("<li>"+city+"</li>");
+    $(listEl).attr("class","list-group-item");
+    $(listEl).attr("data-value",city);
+    $(".History").append(listEl);
+}
+
+function invokePastSearch(event){
+    var liEl=event.target;
+    if (event.target.matches("li")){
+        city=liEl.textContent.trim();
+        getWeather(city);
+    }
+
+}
+
+$(document).on("click",invokePastSearch);
 searchButtonEl.on("click", displayWeather)
+searchButtonEl.on("click", addToList)
