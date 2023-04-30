@@ -22,7 +22,27 @@
         <form class = "Input">
             <input type="text" id = "search-city">
             <button id = "search-button"></button>
-            <div class = "weather"></div>
+            <div id = "future-weather">
+                <h3>Weekend Forecast:</h3>
+                    <div class="forecast" >
+                        <p>Date:<span id="fDate0"></span></p>
+                        <p>Temp:<span id="fTemp0"></span></p>
+                        <p>Humidity:<span id="fHumidity0"></span></p>
+                    </div>
+
+                    <div class="forecast" >
+                        <p>Date:<span id="fDate1"></span></p>
+                        <p>Temp:<span id="fTemp1"></span></p>
+                        <p>Humidity:<span id="fHumidity1"></span></p>
+                    </div>
+
+                    <div class="forecast">
+                        <p>Date:<span id="fDate2"></span></p>
+                        <p>Temp:<span id="fTemp2"></span></p>
+                        <p>Humidity:<span id="fHumidity2"></span></p>
+                    </div>
+            </div>
+            
             <ul class="History"></ul>
         </form>
     </div>
