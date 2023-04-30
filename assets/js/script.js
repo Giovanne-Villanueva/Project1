@@ -2,6 +2,7 @@ var searchCity = $("#search-city")
 var APIkey = "c8af164d906f1649b6b1089b5ec881b1"
 var searchButtonEl = $("#search-button")
 
+
 function getWeather(city){
     //Calls geolocation API
     fetch("http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=" + APIkey)
@@ -91,6 +92,9 @@ function invokePastSearch(event){
 
 }
 
+$("#planner-button").on("click",function(){
+    document.location.replace('./planner.html');
+})
 $(document).on("click",invokePastSearch);
 searchButtonEl.on("click", displayWeather)
 searchButtonEl.on("click", addToList)
