@@ -5,19 +5,57 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/map-search.css">
     <title>Vacation Planner</title>
+
+      <!-- Link the DayJS library -->
+      <script
+      src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
+      integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U="
+      crossorigin="anonymous"
+    ></script>
+    
 </head>
 <body>
-    <header></header>
+    <header>
+        <button id = "planner-button">Planner</button>
+    </header>
     <div class="Container">
         <div class = "map"></div>
+        <iframe id="map-iframe" width="600" height="450" style="border:0;" loading="lazy"></iframe>     <!-- Added <iframe> element which is from the Google Maps Embedded API Documentation -->
         <form class = "Input">
-            <input type="text">
-            <button></button>
-            <div class = "weather"></div>
-            <ul class="History"></ul>
-        </form>
+            <input type="text" id = "search-city">
+            <button id = "search-button"></button>
+            <div id = "future-weather">
+                <h3>Weekend Forecast:</h3>
+                    <div class="forecast" >
+                        <p>Date:<span id="fDate0"></span></p>
+                        <p>Temp:<span id="fTemp0"></span></p>
+                        <p>Humidity:<span id="fHumidity0"></span></p>
+                    </div>
 
+                    <div class="forecast" >
+                        <p>Date:<span id="fDate1"></span></p>
+                        <p>Temp:<span id="fTemp1"></span></p>
+                        <p>Humidity:<span id="fHumidity1"></span></p>
+                    </div>
+
+                    <div class="forecast">
+                        <p>Date:<span id="fDate2"></span></p>
+                        <p>Temp:<span id="fTemp2"></span></p>
+                        <p>Humidity:<span id="fHumidity2"></span></p>
+                    </div>
+            </div>
+            <div>
+                <h1>History</h1>
+            <ul class="History">
+
+            </ul>
+            </div>
+        </form>
     </div>
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/map-search.js"></script>               <!-- map-search.js script was added. This handles all the Google Maps Embedded javascript info -->
 </body>
 </html>
