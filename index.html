@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/map-search.css">
     <title>Vacation Planner</title>
 
       <!-- Link the DayJS library -->
@@ -21,6 +22,7 @@
     </header>
     <div class="Container">
         <div class = "map"></div>
+        <iframe id="map-iframe" width="600" height="450" style="border:0;" loading="lazy"></iframe>     <!-- Added <iframe> element which is from the Google Maps Embedded API Documentation -->
         <form class = "Input">
             <input type="text" id = "search-city">
             <button id = "search-button"></button>
@@ -54,5 +56,6 @@
     </div>
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/map-search.js"></script>               <!-- map-search.js script was added. This handles all the Google Maps Embedded javascript info -->
 </body>
 </html>
