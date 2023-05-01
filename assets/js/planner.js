@@ -258,3 +258,4 @@ plannedEvents();
 addEventEl.addEventListener("click", turnOnForm)
 tripEl.addEventListener("submit", saveEvent)
 tripEl.addEventListener("click", cancelSave)
+
