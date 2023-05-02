@@ -1,25 +1,11 @@
-
-var modalResponse = document.querySelector(".error")
-
-function errorHandeler(event){
-    
-    var element = event.target;
-    console.log(element)
-    if(element.matches("button")){
-        modalResponse.classList.add('invisible');
-    }
-}
-
-
-modalResponse.addEventListener("click", errorHandeler)
-
-//Jose Seto Code
 var searchCity = $("#search-city")
 var APIkey = "c8af164d906f1649b6b1089b5ec881b1"
 var searchButtonEl = $("#search-button")
 var clearButtonEl = $("#clear-button")
 
-
+// This function calls the openweathermap api twice with user input
+// Once is to take the given city name and parse out the latitude and longitude
+// The second is to take the above information and get the 5 day forecast
 function getWeather(city){
     //Calls geolocation API
     fetch("http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=" + APIkey)
@@ -45,6 +31,7 @@ function getWeather(city){
     })
 }
 
+//When called, this function will check if the forecast contains a Friday, Saturday, or Sunday, and display information to the correct day.
 function forecast(parseDays, data){
     if (parseDays == "Fri"){
         var date = dayjs.unix(data.list[i].dt).format('dddd, MMM D, YYYY')
@@ -81,6 +68,7 @@ function forecast(parseDays, data){
     }
 }
 
+//Function to start the proccess to getWeather and display
 function displayWeather(event){
     event.preventDefault();
     if(searchCity.val().trim()!==""){
@@ -89,6 +77,7 @@ function displayWeather(event){
     }
 }
 
+//Adds searched city to a history section
 function addToList(event){
     event.preventDefault();
     var listEl= $("<li>" + city + "</li>");
@@ -97,6 +86,7 @@ function addToList(event){
     $(".History").append(listEl);
 }
 
+//When a previous result is clicked, it will search using that name again
 function invokePastSearch(event){
     var liEl=event.target;
     if (event.target.matches("li")){
@@ -106,6 +96,7 @@ function invokePastSearch(event){
 
 }
 
+//When the button is clicked, sets the history ul to empty.
 function clearHistory(event){
     event.preventDefault();
     $(".History").empty();
@@ -117,8 +108,4 @@ $("#planner-button").on("click",function(){
 $(document).on("click",invokePastSearch);
 searchButtonEl.on("click", displayWeather)
 searchButtonEl.on("click", addToList)
-<<<<<<< HEAD
-
-=======
 clearButtonEl.on("click", clearHistory)
->>>>>>> add-js
