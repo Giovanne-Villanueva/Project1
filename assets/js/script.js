@@ -117,8 +117,6 @@ $("#planner-button").on("click",function(){
 $(document).on("click",invokePastSearch);
 searchButtonEl.on("click", displayWeather)
 searchButtonEl.on("click", addToList)
-<<<<<<< HEAD
 
-=======
 clearButtonEl.on("click", clearHistory)
->>>>>>> add-js
+
