@@ -1,6 +1,7 @@
 var searchCity = $("#search-city")
 var APIkey = "c8af164d906f1649b6b1089b5ec881b1"
 var searchButtonEl = $("#search-button")
+var clearButtonEl = $("#clear-button")
 
 
 function getWeather(city){
@@ -32,7 +33,6 @@ function forecast(parseDays, data){
     if (parseDays == "Fri"){
         var date = dayjs.unix(data.list[i].dt).format('dddd, MMM D, YYYY')
         var humidity= data.list[i].main.humidity;
-        console.log(data.list[i])
         var tempK= data.list[i].main.temp;
         var tempF=(((tempK-273.5)*1.80)+32).toFixed(2);
 
@@ -43,7 +43,6 @@ function forecast(parseDays, data){
     else if(parseDays == "Sat"){
         var date = dayjs.unix(data.list[i].dt).format('dddd, MMM D, YYYY')
         var humidity= data.list[i].main.humidity;
-        console.log(data.list[i])
         var tempK= data.list[i].main.temp;
         var tempF=(((tempK-273.5)*1.80)+32).toFixed(2);
 
@@ -54,7 +53,6 @@ function forecast(parseDays, data){
     else if(parseDays == "Sun"){
         var date = dayjs.unix(data.list[i].dt).format('dddd, MMM D, YYYY')
         var humidity= data.list[i].main.humidity;
-        console.log(data.list[i])
         var tempK= data.list[i].main.temp;
         var tempF=(((tempK-273.5)*1.80)+32).toFixed(2);
 
@@ -77,7 +75,7 @@ function displayWeather(event){
 
 function addToList(event){
     event.preventDefault();
-    var listEl= $("<li>"+city+"</li>");
+    var listEl= $("<li>" + city + "</li>");
     $(listEl).attr("class","list-group-item");
     $(listEl).attr("data-value",city);
     $(".History").append(listEl);
@@ -92,9 +90,15 @@ function invokePastSearch(event){
 
 }
 
+function clearHistory(event){
+    event.preventDefault();
+    $(".History").empty();
+}
+
 $("#planner-button").on("click",function(){
     document.location.replace('./planner.html');
 })
 $(document).on("click",invokePastSearch);
 searchButtonEl.on("click", displayWeather)
 searchButtonEl.on("click", addToList)
+clearButtonEl.on("click", clearHistory)
