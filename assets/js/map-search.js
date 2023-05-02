@@ -64,6 +64,12 @@ document.addEventListener("DOMContentLoaded", function () {
         saveToHistory(city);
       }
     });
+    function clearHistory(event){
+      event.preventDefault()
+      localStorage.setItem("searchHistory", "")
+    }
+    clearButtonEl.on("click", clearHistory)
+
   
     // Load search history when the page is loaded
     loadHistory();
