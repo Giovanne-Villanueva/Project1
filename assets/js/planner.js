@@ -5,10 +5,10 @@ var addEventEl = document.querySelector("#addEvent")
 var eventEl = document.querySelector('.event')
 var tripEl = document.querySelector('.trip')
 var tripData = []
-tripData.push(document.querySelector('#day'))
-tripData.push(document.querySelector('#time'))
-tripData.push(document.querySelector('#dayNight'))
-tripData.push(document.querySelector('#description'))
+tripData.push(document.querySelector('#day')) //0
+tripData.push(document.querySelector('#time')) //1
+tripData.push(document.querySelector('#dayNight')) //2
+tripData.push(document.querySelector('#description')) //3
 
 var weekend = [];
 var dataCount = [0, 0, 0];
@@ -22,14 +22,22 @@ var user={
 function saveEvent(event){
     event.preventDefault();
     var whichOne= 0;
-    var index=0;
+
     
     whichOne = counter(tripData[0].value)
-    index = updateData(whichOne);
+    updateData(whichOne);
     localStorage.removeItem('weekend');
     localStorage.setItem('weekend', JSON.stringify(weekend));
 
+    //reset form input for new data entry
+    tripData[1].textContent="";
+    tripData[3].textContent="";
+    
+    //hide form till next data entry
     turnOffForm();
+    
+    //order data for ease of simplifing data
+    console.log(dataCount)
     orderData();
     console.log(weekend);
 }
@@ -37,7 +45,7 @@ function saveEvent(event){
 function updateData(length){
     //if we reach our limit on reminders and users want to add a new reminder than we
     //replace the first reminder made with the new one
-    if(dataCount[length] >= limit){
+    if(dataCount[length] > limit){
         for(var i=0; i<weekend.length; i++){
             if(tripData[0].value === weekend[i].day){
                 if(weekend[i].next){
@@ -48,14 +56,13 @@ function updateData(length){
                         description:tripData[3].value,
                         next:false
                     }
-                    if( (i+1) > weekend.length){
+                    if( (i+1) >= weekend.length){
                         weekend[0].next=true;
-                        return i;
                     }
                     else{
                         weekend[(i+1)].next=true;
-                        return i;
                     }
+                    return;
                 }
             }
         }
@@ -124,7 +131,7 @@ function displayEvent(data, order){
     
     for(var i=0; i<data.length; i++){
         var div = document.createElement("div");
-        div.classList.add('day');
+        div.classList.add('day', 'bg-emerald-800', );
         div.setAttribute('data-placement', data[order[i]].time);
 
         var header = document.createElement("h3");
@@ -192,7 +199,7 @@ function placement (data){
         var min = "100:100 pm";
         for(var i=0; i< data.length; i++){
             var check= compareTime(data[i].time + ' ' + data[i].dayNight, min)
-            console.log(check)
+            //console.log(check)
             if(check && !order.includes(i)){
                 order[index]=i;
                 min = data[i].time + ' ' + data[i].dayNight;
@@ -213,8 +220,8 @@ function compareTime(time, newTime){
 
     time = time.split(':');
     var minute =time[1].split(' ');
-    console.log(time)
-    console.log(newTime)
+    //console.log(time)
+    //console.log(newTime)
     if( (minute[1] == 'am')  && (newMinute[1] == 'pm') ){
         return true;
     }
@@ -249,6 +256,10 @@ function plannedEvents(){
     
     if(localStorage.getItem('weekend') != null){
         weekend = JSON.parse(localStorage.getItem('weekend'));
+        for(var i = 0; i< weekend.length; i++){
+            counter(weekend[i].day);
+        }
+        console.log(dataCount)
         orderData();
     }
 }
