@@ -128,10 +128,16 @@ function turnOnForm(){
 function displayEvent(data, order){
     var day = document.querySelector('.'+data[0].day);
     day.textContent= '';
+
+    var title = document.createElement('h2');
+    title.textContent= data[0].day;
+    title.classList.add('mx-1')
+
+    day.appendChild(title)
     
     for(var i=0; i<data.length; i++){
         var div = document.createElement("div");
-        div.classList.add('day', 'bg-emerald-800', );
+        div.classList.add('day', 'bg-emerald-500', 'm-1', 'p-1', 'border-solid', 'border-emerald-800', 'rounded', 'border-4');
         div.setAttribute('data-placement', data[order[i]].time);
 
         var header = document.createElement("h3");
