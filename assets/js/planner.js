@@ -1,3 +1,4 @@
+var clearEL = document.querySelector('#clear')
 var fridayEl = document.querySelector('.friday')
 var saturdayEl = document.querySelector('.saturday')
 var sundayEl = document.querySelector('.sunday')
@@ -270,9 +271,16 @@ function plannedEvents(){
     }
 }
 
+function clearData(){
+    localStorage.removeItem('weekend')
+    fridayEl.textContent="Friday";
+    saturdayEl.textContent="Saturday";
+    sundayEl.textContent="Sunday"
+}
+
 plannedEvents();
 
 addEventEl.addEventListener("click", turnOnForm)
 tripEl.addEventListener("submit", saveEvent)
 tripEl.addEventListener("click", cancelSave)
-
+clearEL.addEventListener("click", clearData)
