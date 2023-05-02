@@ -1,3 +1,19 @@
+
+var modalResponse = document.querySelector(".error")
+
+function errorHandeler(event){
+    
+    var element = event.target;
+    console.log(element)
+    if(element.matches("button")){
+        modalResponse.classList.add('invisible');
+    }
+}
+
+
+modalResponse.addEventListener("click", errorHandeler)
+
+//Jose Seto Code
 var searchCity = $("#search-city")
 var APIkey = "c8af164d906f1649b6b1089b5ec881b1"
 var searchButtonEl = $("#search-button")
@@ -98,3 +114,4 @@ $("#planner-button").on("click",function(){
 $(document).on("click",invokePastSearch);
 searchButtonEl.on("click", displayWeather)
 searchButtonEl.on("click", addToList)
+
